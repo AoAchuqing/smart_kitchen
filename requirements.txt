@@ -7,3 +7,4 @@ pydub==0.25.1
 streamlit==0.83.0
 streamlit_webrtc==0.22.1
 typing_extensions==3.10.0.0
+streamlit-echarts==0.3.0
