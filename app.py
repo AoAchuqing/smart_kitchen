@@ -1067,6 +1067,7 @@ def app_algorithm():
 
 def app_knowledge_base():
     st.header('Knowledge Base')
+
     st.subheader('Frequently Asked Questions (FAQs)')
 
     with st.beta_expander('System and Applicaitons'):
@@ -1077,13 +1078,30 @@ def app_knowledge_base():
         st.markdown('#### 3. Where to find the related AI product offerings?')
         st.markdown('Please access the link: [https://www.wavelet-ai.com](https://www.wavelet-ai.com)')
 
-    with st.beta_expander('Operations Safety Guidelines'):
-        st.write('Operations Safety Guidelines')
+    with st.beta_expander('Kitchen Cleaness Standards'):
+        st.markdown('#### 1. Cleaness Requirements:')
+        from PIL import Image
+        image = Image.open("./images/cleaness.png")
+        st.image(image)
+
+    with st.beta_expander('Kitchen Safety Guidelines'):
+        st.markdown('#### 1. Six Kitchen Safety Guidelines:')
+        st.markdown('(1) Always wear shoes.')
+        st.markdown('(2) Wear safe clothing.')
+        st.markdown('(3) Don’t forget to wash your hands.')
+        st.markdown('(4) Use different chopping boards for raw meat, fruits, and vegetables.')
+        st.markdown('(5) Handle hot dishes with care')
+        st.markdown('(6) Have a fire extinguisher and know how to use it.')
+
 
     with st.beta_expander('Emergency Handbook'):
-        st.write('Emergency Handbook')
-
-
+        st.markdown('#### 1. Emergency Handbook')
+        st.markdown('(1) Smother the flames of a grease fire with a dish towel or a pot lid, then remove the pan from the heat source.')
+        st.markdown('(2) Turn off the oven immediately in the event of an oven fire. Keep the oven door closed — the lack of oxygen will suffocate the fire.')
+        st.markdown('(3) Treat bruises from a fall by applying a cold pack or a bag of ice wrapped in a towel. Never apply ice cubes directly to your skin.')
+        st.markdown('(4) Apply warm water or the cut surface of a cold, raw potato to soothe pain from a burn and prevent burn blisters from forming.')
+        st.markdown('(5) For minor burns, apply a little honey. Research shows that this will help the wounds heal faster.')
+        st.markdown('(6) Cover open burn injuries with a sterile, non-stick bandage and cool with an icepack. For severe burns, go to the ER right away.')
 
 def app_employee():
     st.header('Employee Management')
