@@ -39,7 +39,7 @@ from streamlit_webrtc import (
 HERE = Path(__file__).parent
 
 logger = logging.getLogger(__name__)
-st.set_page_config(page_title="Smart Kitchen", page_icon='./images/company_logo.png',layout="wide")
+st.set_page_config(layout="wide")
 
 
 # This code is based on https://github.com/streamlit/demo-self-driving/blob/230245391f2dda0cb464008195a470751c01770b/streamlit_app.py#L48  # noqa: E501
@@ -99,11 +99,6 @@ WEBRTC_CLIENT_SETTINGS = ClientSettings(
 
 def main():
 
-    st.markdown(""" <style>
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    </style> """, unsafe_allow_html=True)
-
     import os
     import base64
 
@@ -133,13 +128,11 @@ def main():
     col2.markdown('#### Andrew Lee \n #### andrew@wavelet-ai.com' )
     st.sidebar.markdown("")
 
-    st.markdown('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">', unsafe_allow_html=True)
-
     # dashboard_page = "Dashboard"
     # statistics_page = "Statistics"
     # algorithm_page = "Algorithm"
     # knowledge_base_page = "Knowledge Base"
-    # staff_page = "staff"
+    # employee_page = "Employee"
     # #
     # app_mode = st.sidebar.selectbox(
     #     "",
@@ -148,7 +141,7 @@ def main():
     #         statistics_page,
     #         algorithm_page,
     #         knowledge_base_page,
-    #         staff_page,
+    #         employee_page,
     #     ],
     # )
 
@@ -165,7 +158,7 @@ def main():
     button_statistics = st.sidebar.button('Statistics')
     button_algorithm = st.sidebar.button('Algorithm')
     button_knowledge = st.sidebar.button('Knowledge Base')
-    button_staff = st.sidebar.button('Staff Management')
+    button_employee = st.sidebar.button('Employee Management')
 
     if button_dashboard:
         session_state.app_mode = 'Dashboard'
@@ -175,14 +168,14 @@ def main():
         session_state.app_mode = 'Algorithm'
     if button_knowledge:
         session_state.app_mode = 'Knowledge Base'
-    if button_staff:
-        session_state.app_mode = 'Staff Management'
+    if button_employee:
+        session_state.app_mode = 'Employee Management'
 
     app_mode = session_state.app_mode
 
     if app_mode == '':
         app_dashboard()
-    elif app_mode == 'Dashboard':
+    if app_mode == 'Dashboard':
         app_dashboard()
     elif app_mode == 'Statistics':
         app_statistics()
@@ -190,50 +183,8 @@ def main():
         app_algorithm()
     elif app_mode == 'Knowledge Base':
         app_knowledge_base()
-    elif app_mode == 'Staff Management':
-        app_staff()
-
-
-
-
-    # if st.sidebar.button('Dashboard')):
-    #     first_time_loading = False
-    #     app_dashboard()
-    #
-    # if st.sidebar.button('Statistics'):
-    #     first_time_loading = False
-    #     app_statistics()
-    #
-    # if st.sidebar.button('Algorithm'):
-    #     first_time_loading = False
-    #     app_algorithm()
-    #
-    # if st.sidebar.button('Knowledge Base'):
-    #     first_time_loading = False
-    #     app_knowledge_base()
-    #
-    # if st.sidebar.button('Staff Management'):
-    #     first_time_loading = False
-    #     app_staff()
-
-    # if (first_time_loading):
-    #     app_dashboard()
-
-    # if app_mode == dashboard_page:
-    #     app_dashboard()
-    # elif app_mode == statistics_page:
-    #     app_statistics()
-    # elif app_mode == algorithm_page:
-    #     app_algorithm()
-    # elif app_mode == knowledge_base_page:
-    #     app_knowledge_base()
-    # elif app_mode == staff_page:
-    #     app_staff()
-
-    # logger.debug("=== Alive threads ===")
-    # for thread in threading.enumerate():
-    #     if thread.is_alive():
-    #         logger.debug(f"  {thread.name} ({thread.ident})")
+    elif app_mode == 'Employee Management':
+        app_employee()
 
 def app_loopback():
     """ Simple video loopback """
@@ -248,90 +199,46 @@ def app_dashboard():
 
     st.header('Dashboard')
 
-    row1_1, row1_2, row1_3, row1_4 = st.beta_columns((2,2,2,2))
-    row1_1.markdown(f'''<div class="card text-white bg-success mb-3" style="width: 13rem">
-      <div class="card-body">
-        <h6 class="card-title" style="color:white">Mask wearing rate</h5>
-        <p class="card-text">90%</p>
-      </div>
-    </div>''', unsafe_allow_html=True)
+    row1_1, row1_2, row1_3, row1_4 = st.beta_columns((2,2.1,2,2))
+    row1_1.success("Mask wearing rate: 90%")
+    row1_2.success("Uniform wearing rate: 90%")
+    row1_3.error("Rodent rist: High")
+    row1_4.success("Risk of gas leakage: Low")
 
-    row1_2.markdown(f'''<div class="card text-white bg-success mb-3" style="width: 13rem">
-      <div class="card-body">
-        <h6 class="card-title" style="color:white">Uniform wearing rate</h5>
-        <p class="card-text">90%</p>
-      </div>
-    </div>''', unsafe_allow_html=True)
-
-    row1_3.markdown(f'''<div class="card text-white bg-danger mb-3" style="width: 13rem">
-      <div class="card-body">
-        <h6 class="card-title" style="color:white">Rodent risk</h5>
-        <p class="card-text">High</p>
-      </div>
-    </div>''', unsafe_allow_html=True)
-
-    row1_4.markdown(f'''<div class="card text-white bg-success mb-3" style="width: 13rem">
-      <div class="card-body">
-        <h6 class="card-title" style="color:white">Risk of gas leakage</h5>
-        <p class="card-text">Low</p>
-      </div>
-    </div>''', unsafe_allow_html=True)
-
-
-    row2_1, row2_2 = st.beta_columns((6,2))
+    row2_1, row2_2 = st.beta_columns((6.1,2))
 
     with row2_1:
-        st.write("**Kitchen Status Radar**")
+        st.subheader("Kitchen Status Radar")
         kitchen_status_radar()
     with row2_2:
-        st.write("**Message**")
-        st.markdown(f'''<div class="card text-in bg-info mb-3" style="width: 13rem">
-          <div class="card-body">
-            <h6 class="card-title" style="color:white">06/05 16:30</h5>
-            <h6 class="card-title" style="color:white">staff ID: 052</h5>
-            <p class="card-text">Did not wear mask</p>
-          </div>
-        </div>''', unsafe_allow_html=True)
+        st.subheader("Message")
+        st.info("06/05 16:30 \n Employee ID: 052 \n Did not wear mask")
+        st.info("06/10 07:23 \n Employee ID: 530 \n Did not wear chef hat")
+        st.info("06/12 11:15 \n High risk of gas leakage")
 
-        st.markdown(f'''<div class="card text-white bg-info mb-3" style="width: 13rem">
-          <div class="card-body">
-            <h6 class="card-title" style="color:white">06/10 07:23</h5>
-            <h6 class="card-title" style="color:white">staff ID: 530</h5>
-            <p class="card-text">Did not wear chef hat</p>
-          </div>
-        </div>''', unsafe_allow_html=True)
-
-        st.markdown(f'''<div class="card text-white bg-warning mb-3" style="width: 13rem">
-          <div class="card-body">
-            <h6 class="card-title" style="color:white">06/12 11:15</h5>
-            <p class="card-text">High risk of gas leakage</p>
-          </div>
-        </div>''', unsafe_allow_html=True)
-
-
-
-    row3_1, row3_2 = st.beta_columns((4,4))
+    row3_1, row3_2 = st.beta_columns((4.1,4))
 
     with row3_1:
-        st.write("**Staff Performance Scoring**")
-        staff_scoring_bar_chart()
+        st.subheader("Employee Performance Scoring")
+        employee_scoring_bar_chart()
 
     with row3_2:
-        st.write("**Canteen Capacity**")
-        capacity_gauge()
+        st.subheader("Camera Performance")
+        camera_performance_gauge()
 
 
 def kitchen_status_radar():
     option = {
         #"title": {"text": "基础雷达图"},
+        "legend": {"data": ["Allocated Budget", "Actual Spending"]},
         "radar": {
             "indicator": [
-                {"name": "Manpower arrangement", "max": 6500},
-                {"name": "Operation Efficiency", "max": 16000},
-                {"name": "Food quality", "max": 30000},
-                {"name": "Cleaness", "max": 38000},
-                {"name": "Client Satisfaction", "max": 52000},
-                {"name": "Safety awareness", "max": 25000},
+                {"name": "Administration", "max": 6500},
+                {"name": "Operation", "max": 16000},
+                {"name": "Ingredients", "max": 30000},
+                {"name": "Utility", "max": 38000},
+                {"name": "Rental", "max": 52000},
+                {"name": "Human Resource", "max": 25000},
             ]
         },
         "series": [
@@ -341,21 +248,19 @@ def kitchen_status_radar():
                 "data": [
                     {
                         "value": [4200, 3000, 20000, 35000, 50000, 18000],
-                        "name": "Last week",
+                        "name": "Allocated Budget",
                     },
                     {
                         "value": [5000, 14000, 28000, 26000, 42000, 21000],
-                        "name": "This week",
+                        "name": "Actual Spending",
                     },
                 ],
             }
         ],
-        "legend": {"data": ["Last week", "This week"]},
     }
     st_echarts(option, height="400px")
 
-
-def capacity_gauge():
+def camera_performance_gauge():
     option = {
         "series": [
             {
@@ -368,7 +273,7 @@ def capacity_gauge():
                     "overlap": False,
                     "roundCap": True,
                     "clip": False,
-                    "itemStyle": {"borderWidth": 0, "borderColor": "#464646"},
+                    "itemStyle": {"borderWidth": 1, "borderColor": "#464646"},
                 },
                 "axisLine": {"lineStyle": {"width": 40}},
                 "splitLine": {"show": False, "distance": 0, "length": 10},
@@ -377,21 +282,21 @@ def capacity_gauge():
                 "data": [
                     {
                         "value": random.randint(1, 99),
-                        "name": "Hall 1",
-                        "title": {"offsetCenter": ["0%", "-35%"]},
+                        "name": "Perfect",
+                        "title": {"offsetCenter": ["0%", "-30%"]},
                         "detail": {"offsetCenter": ["0%", "-20%"]},
                     },
                     {
                         "value": random.randint(1, 99),
-                        "name": "Hall 2",
+                        "name": "Good",
                         "title": {"offsetCenter": ["0%", "0%"]},
-                        "detail": {"offsetCenter": ["0%", "15%"]},
+                        "detail": {"offsetCenter": ["0%", "10%"]},
                     },
                     {
                         "value": random.randint(1, 99),
-                        "name": "Hall 3",
+                        "name": "Commonly",
                         "title": {"offsetCenter": ["0%", "30%"]},
-                        "detail": {"offsetCenter": ["0%", "45%"]},
+                        "detail": {"offsetCenter": ["0%", "40%"]},
                     },
                 ],
                 "title": {"fontSize": 14},
@@ -409,10 +314,9 @@ def capacity_gauge():
         ]
     }
 
-    st_echarts(option, height="400px", key="echarts")
+    st_echarts(option, height="500px", key="echarts")
 
-
-def staff_scoring_bar_chart():
+def employee_scoring_bar_chart():
     options = {
         "xAxis": {
             "type": "category",
@@ -438,11 +342,10 @@ def staff_scoring_bar_chart():
         options=options, height="400px",
     )
 
-
-def staff_scoring_line_chart():
+def employee_scoring_line_chart():
     with open("./data/life-expectancy-table.json") as f:
         raw_data = json.load(f)
-    Staffs = [
+    employees = [
         "Andy",
         "Chris",
         "Dan",
@@ -455,27 +358,27 @@ def staff_scoring_line_chart():
 
     datasetWithFilters = [
         {
-            "id": f"dataset_{Staff}",
+            "id": f"dataset_{employee}",
             "fromDatasetId": "dataset_raw",
             "transform": {
                 "type": "filter",
                 "config": {
                     "and": [
                         {"dimension": "Year", "gte": 1950},
-                        {"dimension": "Staff", "=": Staff},
+                        {"dimension": "Employee", "=": employee},
                     ]
                 },
             },
         }
-        for Staff in Staffs
+        for employee in employees
     ]
 
     seriesList = [
         {
             "type": "line",
-            "datasetId": f"dataset_{Staff}",
+            "datasetId": f"dataset_{employee}",
             "showSymbol": False,
-            "name": Staff,
+            "name": employee,
             "endLabel": {
                 "show": True,
                 "formatter": JsCode(
@@ -487,12 +390,12 @@ def staff_scoring_line_chart():
             "encode": {
                 "x": "Year",
                 "y": "Income",
-                "label": ["Staff", "Income"],
+                "label": ["Employee", "Income"],
                 "itemName": "Year",
                 "tooltip": ["Income"],
             },
         }
-        for Staff in Staffs
+        for employee in employees
     ]
 
     option = {
@@ -505,7 +408,6 @@ def staff_scoring_line_chart():
         "series": seriesList,
     }
     st_echarts(options=option, height="500px")
-
 
 def crowd_monitoring_heat_map():
     hours = [
@@ -743,7 +645,6 @@ def crowd_monitoring_heat_map():
     }
     st_echarts(option, height="500px")
 
-
 def cost_ranking_pie_chart():
     option = {
         "legend": {"top": "bottom"},
@@ -751,34 +652,34 @@ def cost_ranking_pie_chart():
             "show": True,
             "feature": {
                 "mark": {"show": True},
-                #"dataView": {"show": True, "readOnly": False},
-                #"restore": {"show": True},
-                #"saveAsImage": {"show": True},
+                "dataView": {"show": True, "readOnly": False},
+                "restore": {"show": True},
+                "saveAsImage": {"show": True},
             },
         },
         "series": [
             {
+                "name": "面积模式",
                 "type": "pie",
-                "radius": [25, 100],
+                "radius": [50, 250],
                 "center": ["50%", "50%"],
                 "roseType": "area",
                 "itemStyle": {"borderRadius": 8},
                 "data": [
-                    {"value": 40, "name": "Human Resource"},
-                    {"value": 38, "name": "Rental"},
-                    {"value": 32, "name": "Cooking Ingredients"},
-                    {"value": 30, "name": "Infrastructure"},
-                    {"value": 28, "name": "Maintenance"},
-                    {"value": 26, "name": "Others"},
-                    #{"value": 22, "name": "cost 7"},
-                    #{"value": 18, "name": "cost 8"},
+                    {"value": 40, "name": "cost 1"},
+                    {"value": 38, "name": "cost 2"},
+                    {"value": 32, "name": "cost 3"},
+                    {"value": 30, "name": "cost 4"},
+                    {"value": 28, "name": "cost 5"},
+                    {"value": 26, "name": "cost 6"},
+                    {"value": 22, "name": "cost 7"},
+                    {"value": 18, "name": "cost 8"},
                 ],
             }
         ],
     }
 
-    st_echarts(options=option, height="300px")
-
+    st_echarts(options=option, height="600px")
 
 def object_detected_bar_chart():
     options = {
@@ -835,22 +736,18 @@ def object_detected_bar_chart():
             },
         ],
     }
-    st_echarts(options=options, height="300px")
+    st_echarts(options=options, height="500px")
 
 def app_statistics():
     st.header('Statistics')
 
-    row1, row2 = st.beta_columns((2,2))
+    st.subheader("Cost Ranking")
+    cost_ranking_pie_chart()
 
-    with row1:
-        st.write("**Cost Ranking**")
-        cost_ranking_pie_chart()
-    with row2:
-        st.write("**Detected Objects**")
-        object_detected_bar_chart()
+    st.subheader("Object Detected Bar Chart")
+    object_detected_bar_chart()
 
-    st.write("")
-    st.write("**Hourly Staff Stay-in Monitoring**")
+    st.subheader("Crowd Monitoring")
     crowd_monitoring_heat_map()
 
 
@@ -1148,16 +1045,16 @@ def app_algorithm():
         'Status':['Running', 'Running', 'Running',"Closed"]}
 
     with left_column:
-        st.write("**Device List**")
+        st.subheader("Device List")
         import pandas as pd
         df = pd.DataFrame(data)
         st.table(df)
 
     # Or even better, call Streamlit functions inside a "with" block:
     with right_column:
-        st.write("**Settings**")
+        st.subheader("Settings")
         # to make the radio buttons align horizontally
-        st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
+        st.write('<style>div.row-widget.stRadio > div{flex-Bottleion:row;}</style>', unsafe_allow_html=True)
         display = st.radio(
             'Display',
             ("Single View", "Multiple View"))
@@ -1171,24 +1068,24 @@ def app_algorithm():
 def app_knowledge_base():
     st.header('Knowledge Base')
 
-    st.write('**Frequently Asked Questions (FAQs)**')
+    st.subheader('Frequently Asked Questions (FAQs)')
 
     with st.beta_expander('System and Applicaitons'):
-        st.write('**1. How to download the historical detected recordings?**')
+        st.markdown('#### 1. How to download the historical detected recordings?')
         st.markdown('Access Algorithm Page -> Export Recordings Button -> Download to Local Folder')
-        st.markdown('**2. How to send the alerts to SMS and Email?**')
+        st.markdown('#### 2. How to send the alerts to SMS and Email?')
         st.markdown('Please subsribe the add-on services packages in the admin panel.')
-        st.markdown('**3. Where to find the related AI product offerings?**')
+        st.markdown('#### 3. Where to find the related AI product offerings?')
         st.markdown('Please access the link: [https://www.wavelet-ai.com](https://www.wavelet-ai.com)')
 
     with st.beta_expander('Kitchen Cleaness Standards'):
-        st.markdown('**1. Cleaness Requirements:**')
+        st.markdown('#### 1. Cleaness Requirements:')
         from PIL import Image
         image = Image.open("./images/cleaness.png")
         st.image(image)
 
     with st.beta_expander('Kitchen Safety Guidelines'):
-        st.markdown('**1. Six Kitchen Safety Guidelines:**')
+        st.markdown('#### 1. Six Kitchen Safety Guidelines:')
         st.markdown('(1) Always wear shoes.')
         st.markdown('(2) Wear safe clothing.')
         st.markdown('(3) Don’t forget to wash your hands.')
@@ -1198,7 +1095,7 @@ def app_knowledge_base():
 
 
     with st.beta_expander('Emergency Handbook'):
-        st.markdown('**1. Emergency Handbook**')
+        st.markdown('#### 1. Emergency Handbook')
         st.markdown('(1) Smother the flames of a grease fire with a dish towel or a pot lid, then remove the pan from the heat source.')
         st.markdown('(2) Turn off the oven immediately in the event of an oven fire. Keep the oven door closed — the lack of oxygen will suffocate the fire.')
         st.markdown('(3) Treat bruises from a fall by applying a cold pack or a bag of ice wrapped in a towel. Never apply ice cubes directly to your skin.')
@@ -1206,16 +1103,15 @@ def app_knowledge_base():
         st.markdown('(5) For minor burns, apply a little honey. Research shows that this will help the wounds heal faster.')
         st.markdown('(6) Cover open burn injuries with a sterile, non-stick bandage and cool with an icepack. For severe burns, go to the ER right away.')
 
-
-def app_staff():
-    st.subheader("Staff Management")
+def app_employee():
+    st.header('Employee Management')
 
     d = st.date_input(
         "Select a date:",
         datetime.date(2021, 6, 18))
 
-    st.write('**Staff Performance Scoring**')
-    staff_scoring_line_chart()
+    st.subheader("Employee Performance Scoring")
+    employee_scoring_line_chart()
 
 
 def app_streaming():
@@ -1457,7 +1353,7 @@ def app_media_constraints():
         mode=WebRtcMode.SENDRECV,
         client_settings=WEBRTC_CLIENT_SETTINGS,
     )
-    st.write(f"**The frame rate is set as {frame_rate}**")
+    st.write(f"The frame rate is set as {frame_rate}")
 
 
 if __name__ == "__main__":

@@ -4,7 +4,7 @@ matplotlib==3.4.2
 numpy==1.20.3
 opencv-python-headless==4.5.2.54
 pydub==0.25.1
-streamlit==0.83.0
+streamlit==0.84.0
 streamlit_webrtc==0.22.1
 typing_extensions==3.10.0.0
 streamlit-echarts==0.3.0
