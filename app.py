@@ -440,7 +440,7 @@ def staff_scoring_bar_chart():
 
 
 def staff_scoring_line_chart():
-    with open("./data/life-expectancy-table.json") as f:
+    with open("./data_input/life-expectancy-table.json") as f:
         raw_data = json.load(f)
     Staffs = [
         "Andy",
