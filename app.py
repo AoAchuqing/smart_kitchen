@@ -1208,7 +1208,7 @@ def app_knowledge_base():
 
 
 def app_staff():
-    st.subheader("Staff Management")
+    st.header("Staff Management")
 
     d = st.date_input(
         "Select a date:",
@@ -1457,7 +1457,7 @@ def app_media_constraints():
         mode=WebRtcMode.SENDRECV,
         client_settings=WEBRTC_CLIENT_SETTINGS,
     )
-    st.write(f"**The frame rate is set as {frame_rate}**")
+    st.write(f"The frame rate is set as {frame_rate}")
 
 
 if __name__ == "__main__":
