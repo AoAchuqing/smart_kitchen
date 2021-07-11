@@ -123,13 +123,17 @@ def main():
             </a>'''
         return html_code
 
+    #col3, col4 = st.sidebar.beta_columns((1,4))
     logo_link = get_img_with_href('./images/company_logo.png', 'https://www.wavelet-ai.com')
+    #col3.markdown(logo_link, unsafe_allow_html=True)
+    #col4.header("Wavelet Smart Kitchen ")
+
     st.sidebar.markdown(logo_link, unsafe_allow_html=True)
     st.sidebar.title("Wavelet Smart Kitchen ")
 
     st.sidebar.markdown("")
-    col1, col2 = st.sidebar.beta_columns((1,2))
-    col1.image("https://image.flaticon.com/icons/png/512/3048/3048122.png",width = 75)
+    col1, col2 = st.sidebar.beta_columns((1,3))
+    col1.image("https://image.flaticon.com/icons/png/512/149/149071.png",width = 60)
     col2.markdown('#### Andrew Lee \n #### andrew@wavelet-ai.com' )
     st.sidebar.markdown("")
 
@@ -163,7 +167,7 @@ def main():
 
     button_dashboard = st.sidebar.button('Dashboard')
     button_statistics = st.sidebar.button('Statistics')
-    button_algorithm = st.sidebar.button('Algorithm')
+    button_algorithm = st.sidebar.button('WaveKitchen')
     button_knowledge = st.sidebar.button('Knowledge Base')
     button_staff = st.sidebar.button('Staff Management')
 
@@ -249,30 +253,30 @@ def app_dashboard():
     st.header('Dashboard')
 
     row1_1, row1_2, row1_3, row1_4 = st.beta_columns((2,2,2,2))
-    row1_1.markdown(f'''<div class="card text-white bg-success mb-3" style="width: 13rem">
+    row1_1.markdown(f'''<div class="card text-white bg-success mb-3">
       <div class="card-body">
-        <h6 class="card-title" style="color:white">Mask wearing rate</h5>
+        <h6 class="card-title" style="color:white">Mask wearing rate</h6>
         <p class="card-text">90%</p>
       </div>
     </div>''', unsafe_allow_html=True)
 
-    row1_2.markdown(f'''<div class="card text-white bg-success mb-3" style="width: 13rem">
+    row1_2.markdown(f'''<div class="card text-white bg-success mb-3">
       <div class="card-body">
-        <h6 class="card-title" style="color:white">Uniform wearing rate</h5>
+        <h6 class="card-title" style="color:white">Uniform wearing rate</h6>
         <p class="card-text">90%</p>
       </div>
     </div>''', unsafe_allow_html=True)
 
-    row1_3.markdown(f'''<div class="card text-white bg-danger mb-3" style="width: 13rem">
+    row1_3.markdown(f'''<div class="card text-white bg-danger mb-3">
       <div class="card-body">
-        <h6 class="card-title" style="color:white">Rodent risk</h5>
+        <h6 class="card-title" style="color:white">Rodent risk</h6>
         <p class="card-text">High</p>
       </div>
     </div>''', unsafe_allow_html=True)
 
-    row1_4.markdown(f'''<div class="card text-white bg-success mb-3" style="width: 13rem">
+    row1_4.markdown(f'''<div class="card text-white bg-success mb-3">
       <div class="card-body">
-        <h6 class="card-title" style="color:white">Risk of gas leakage</h5>
+        <h6 class="card-title" style="color:white">Risk of gas leakage</h6>
         <p class="card-text">Low</p>
       </div>
     </div>''', unsafe_allow_html=True)
@@ -285,25 +289,25 @@ def app_dashboard():
         kitchen_status_radar()
     with row2_2:
         st.write("**Message**")
-        st.markdown(f'''<div class="card text-in bg-info mb-3" style="width: 13rem">
+        st.markdown(f'''<div class="card text-white bg-info mb-3">
           <div class="card-body">
-            <h6 class="card-title" style="color:white">06/05 16:30</h5>
-            <h6 class="card-title" style="color:white">staff ID: 052</h5>
+            <h6 class="card-title" style="color:white">06/05 16:30</h6>
+            <h6 class="card-title" style="color:white">staff ID: 052</h6>
             <p class="card-text">Did not wear mask</p>
           </div>
         </div>''', unsafe_allow_html=True)
 
-        st.markdown(f'''<div class="card text-white bg-info mb-3" style="width: 13rem">
+        st.markdown(f'''<div class="card text-white bg-info mb-3">
           <div class="card-body">
-            <h6 class="card-title" style="color:white">06/10 07:23</h5>
-            <h6 class="card-title" style="color:white">staff ID: 530</h5>
+            <h6 class="card-title" style="color:white">06/10 07:23</h6>
+            <h6 class="card-title" style="color:white">staff ID: 530</h6>
             <p class="card-text">Did not wear chef hat</p>
           </div>
         </div>''', unsafe_allow_html=True)
 
-        st.markdown(f'''<div class="card text-white bg-warning mb-3" style="width: 13rem">
+        st.markdown(f'''<div class="card text-white bg-warning mb-3">
           <div class="card-body">
-            <h6 class="card-title" style="color:white">06/12 11:15</h5>
+            <h6 class="card-title" style="color:white">06/12 11:15</h6>
             <p class="card-text">High risk of gas leakage</p>
           </div>
         </div>''', unsafe_allow_html=True)
@@ -501,7 +505,7 @@ def staff_scoring_line_chart():
         "tooltip": {"order": "valueDesc", "trigger": "axis"},
         "xAxis": {"type": "category", "nameLocation": "middle"},
         "yAxis": {"name":"score"},
-        "grid": {"right": 140},
+        "grid": {"right": 40},
         "series": seriesList,
     }
     st_echarts(options=option, height="500px")
@@ -997,7 +1001,7 @@ def app_delayed_echo():
 
 
 def app_algorithm():
-    st.header('Algorithm')
+    st.header('WaveKitchen')
 
     # """Object detection demo with MobileNet SSD.
     # This model and code are based on
