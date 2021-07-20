@@ -1007,40 +1007,100 @@ def app_algorithm():
     # This model and code are based on
     # https://github.com/robmarkcole/object-detection-app
     # """
-    MODEL_URL = "https://github.com/robmarkcole/object-detection-app/raw/master/model/MobileNetSSD_deploy.caffemodel"  # noqa: E501
+    #MODEL_URL = "https://github.com/robmarkcole/object-detection-app/raw/master/model/MobileNetSSD_deploy.caffemodel"  # noqa: E501
     MODEL_LOCAL_PATH = HERE / "./models/MobileNetSSD_deploy.caffemodel"
-    PROTOTXT_URL = "https://github.com/robmarkcole/object-detection-app/raw/master/model/MobileNetSSD_deploy.prototxt.txt"  # noqa: E501
+    #PROTOTXT_URL = "https://github.com/robmarkcole/object-detection-app/raw/master/model/MobileNetSSD_deploy.prototxt.txt"  # noqa: E501
     PROTOTXT_LOCAL_PATH = HERE / "./models/MobileNetSSD_deploy.prototxt.txt"
 
     CLASSES = [
         "background",
-        "aeroplane",
-        "bicycle",
-        "bird",
-        "boat",
-        "bottle",
-        "bus",
+        "person",
+        "bicycles",
         "car",
+        "motorcycle",
+        "airplane",
+        "bus",
+        "train",
+        "truck",
+        "boat",
+        "traffic light",
+        "fire hydrant",
+        "stop sign",
+        "parking meter",
+        "bench",
+        "bird",
         "cat",
-        "chair",
-        "cow",
-        "diningtable",
         "dog",
         "horse",
-        "motorbike",
-        "person",
-        "pottedplant",
         "sheep",
-        "sofa",
-        "train",
-        "tvmonitor",
+        "cow",
+        "elephant",
+        "bear",
+        "zebra",
+        "giraffe",
+        "backpack",
+        "umbrella",
+        "handbag",
+        "tie",
+        "suitcase",
+        "frisbee",
+        "skis",
+        "snowboard",
+        "sports ball",
+        "kite",
+        "baseball bat",
+        "baseball glove",
+        "skateboard",
+        "surfboard",
+        "tennis racket",
+        "bottle",
+        "wine glass",
+        "cup",
+        "fork",
+        "knife",
+        "spoon",
+        "bowl",
+        "banana",
+        "apple",
+        "sandwich",
+        "orange",
+        "broccoli",
+        "carrot",
+        "hot dog",
+        "pizza",
+        "donut",
+        "cake",
+        "chair",
+        "couch",
+        "potted plant",
+        "bed",
+        "dining table",
+        "toilet",
+        "tv",
+        "laptop",
+        "mouse",
+        "remote",
+        "keyboard",
+        "cell phone",
+        "microwave",
+        "oven",
+        "toaster",
+        "sink",
+        "refrigerator",
+        "book",
+        "clock",
+        "vase",
+        "scissors",
+        "teddy bear",
+        "hair drier",
+        "toothbrush"
     ]
     COLORS = np.random.uniform(0, 255, size=(len(CLASSES), 3))
 
-    download_file(MODEL_URL, MODEL_LOCAL_PATH, expected_size=23147564)
-    download_file(PROTOTXT_URL, PROTOTXT_LOCAL_PATH, expected_size=29353)
+    #download_file(MODEL_URL, MODEL_LOCAL_PATH, expected_size=23147564)
+    #download_file(PROTOTXT_URL, PROTOTXT_LOCAL_PATH, expected_size=29353)
 
-    DEFAULT_CONFIDENCE_THRESHOLD = 0.5
+    DEFAULT_CONFIDENCE_THRESHOLD = 0.1 # default 0.5
 
     class Detection(NamedTuple):
         name: str
